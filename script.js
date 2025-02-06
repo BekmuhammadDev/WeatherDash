@@ -41,35 +41,39 @@ function getWeatherDetails(city, lat, lon, country, state) {
         .catch(() => {
             alert('Failed to fetch current weather');
         });
-        
-    fetch(FORECAST_API_URL).then(res => res.json()).then(data =>{
-        let uniqueForecastDays = [];
-        let fiveDaysForecast = data.list.filter(forecast => {
-            let forecastdate = new Date(forecast.dt_txt).getDate();
-            if (!uniqueForecastDays.includes(forecastdate)) {
-               return uniqueForecastDays.push(forecastdate);
-                
+
+    
+    fetch(FORECAST_API_URL)
+        .then(res => res.json())
+        .then(data => {
+            let uniqueForecastDays = [];
+            let fiveDaysForecast = data.list.filter(forecast => {
+                let forecastdate = new Date(forecast.dt_txt).getDate();
+                if (!uniqueForecastDays.includes(forecastdate)) {
+                    uniqueForecastDays.push(forecastdate);
+                    return true; 
+                }
+                return false;
+            });
+
+            fiveDaysForecastCard.innerHTML = '';
+            for (let i = 1; i < fiveDaysForecast.length; i++) {
+                let date = new Date(fiveDaysForecast[i].dt_txt);
+                fiveDaysForecastCard.innerHTML += `
+                    <div class="forecast-item">
+                        <div class="icon-wrapper">
+                            <img src="https://openweathermap.org/img/wn/${fiveDaysForecast[i].weather[0].icon}.png" alt="">
+                            <span>${fiveDaysForecast[i].main.temp.toFixed(2)}&deg;C</span>
+                        </div>
+                        <p>${date.getDate()} ${months[date.getMonth()]}</p>
+                        <p>${days[date.getDay()]}</p>
+                    </div>
+                `;
             }
         })
-        fiveDaysForecastCard.innerHTML='';
-        for(i = 1; i < fiveDaysForecast.length; i++){
-            let date = new Date(fiveDaysForecast[i].dt_txt);
-            fiveDaysForecastCard.innerHTML += `
-              <div class="forecast-item">
-                            <div class="icon-wrapper">
-                                <img src="https://openweathermap.org/img/wn/${fiveDaysForecast[i].weather[0].icon}.png" alt="">
-                                <span>${(fiveDaysForecast[i].main.temp - 273.15).toFixed(2)}&deg;C</span>
-                            </div>
-                            <p>${date.getDate()} ${months[date.getMonth()]}</p>
-                            <p>${days[date.getDay()]}</p>
-                        </div>
-             `
-        }
-
-    }).catch(() => {
-        alert('Failed to fetch weather forcecast');
-    });
-    
+        .catch(() => {
+            alert('Failed to fetch weather forecast');
+        });
 }
 
 function getCityCoordinates() {
