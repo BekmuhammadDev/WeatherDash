@@ -12,15 +12,15 @@ let humdityVal = document.getElementById('humidityVal'),
     windSpeedval = document.getElementById('windSpeedval'),
     feelsval = document.getElementById('feelsval'),
     hourlyForecastCard = document.querySelector('.hourly-forecast')
-aqiList = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
+aqiList = ['Yaxshi', 'normal', 'Ortacha', 'Yomon', 'juda yomon'];
 
 function getWeatherDetails(city, lat, lon, country,) {
     let FORECAST_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     let WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     let API_POLLUTION_API_URL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${api_key}`;
 
-    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let days = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Pyshanba', 'Juma', 'Shanba'];
+    let months = ['Yanvar', 'Fevral', 'Mart', 'April', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'];
 
     fetch(API_POLLUTION_API_URL)
         .then(res => res.json())
@@ -30,7 +30,7 @@ function getWeatherDetails(city, lat, lon, country,) {
 
             apiCard.innerHTML = `
                 <div class="card-head">
-                    <p>Air Quality Index</p>
+                    <p>Havo sifati indeksi</p>
                     <p class="air-index aqi-${data.list[0].main.aqi}">${aqiList[data.list[0].main.aqi - 1]}</p>
                 </div>
                 <div class="air-indices">
@@ -48,7 +48,7 @@ function getWeatherDetails(city, lat, lon, country,) {
     fetch(WEATHER_API_URL)
         .then(res => {
             if (!res.ok) {
-                throw new Error('Failed to fetch current weather');
+                throw new Error('Joriy ob-havoni olib bo‘lmadi');
             }
             return res.json();
         })
@@ -57,7 +57,7 @@ function getWeatherDetails(city, lat, lon, country,) {
             currentWeatherCard.innerHTML = `
                 <div class="current-weather">
                     <div class="details">
-                        <p>Now</p>
+                        <p>Hozir</p>
                         <h2>${data.main.temp.toFixed(2)}&deg;C</h2>
                         <p>${data.weather[0].description}</p>
                     </div>
@@ -81,20 +81,20 @@ function getWeatherDetails(city, lat, lon, country,) {
 
             sunriseCard.innerHTML = `
                 <div class="card-head">
-                    <p>Sunrise & Sunset</p>
+                    <p>Quyosh chiqishi-botishi</p>
                 </div>
                 <div class="sunrise-sunset">
                     <div class="item">
                         <div class="icon"><i class="fa-light fa-sunrise fa-4x"></i></div>
                         <div>
-                            <p>Sunrise</p>
+                            <p>Quyosh chiqishi</p>
                             <h2>${sRiseTime}</h2>
                         </div>
                     </div>
                     <div class="item">
                         <div class="icon"><i class="fa-light fa-sunset fa-4x"></i></div>
                         <div>
-                            <p>Sunset</p>
+                            <p>Quyosh botishi</p>
                             <h2>${sSetTime}</h2>
                         </div>
                     </div>
@@ -108,7 +108,7 @@ function getWeatherDetails(city, lat, lon, country,) {
 
         })
         .catch(() => {
-            alert('Failed to fetch current weather');
+            alert('Joriy ob-havoni olib bo‘lmadi');
         });
     fetch(FORECAST_API_URL)
         .then(res => res.json())
@@ -156,7 +156,7 @@ function getWeatherDetails(city, lat, lon, country,) {
             }
         })
         .catch(() => {
-            alert('Failed to fetch weather forecast');
+            alert('Ob-havo maʼlumotlarini olib boʻlmadi');
         });
 }
 
@@ -177,7 +177,7 @@ function getCityCoordinates() {
             getWeatherDetails(name, lat, lon, country, state);
         })
         .catch(() => {
-            alert('City not found');
+            alert('Shaxar Topilmadi !');
         });
 }
 
@@ -190,11 +190,11 @@ function getUserCoordinates(){
            let {name, country, state} = data[0];
            getWeatherDetails(name, latitude, longitude, country, state);
         }).catch(()=>{
-            alert('Failed to get location');
+            alert('Joylashuv aniqlanmadi');
         })
     }), error => {
         if(error.code === error.PERMISSION_DENIED){
-            alert('User denied the request for Geolocation.');
+            alert(`Foydalanuvchi Geolocation so'rovini rad etdi.`);
         }
     }
 }
