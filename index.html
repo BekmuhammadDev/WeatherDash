@@ -7,6 +7,7 @@
     <title>Weather App</title>
     <link href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -104,6 +105,7 @@
                 <h2>Today's Highlights</h2>
                 <div class="highlights">
                     <div class="card">
+                        
                         <div class="card-head">
                             <p>Air Quality Index</p>
                             <p class="air-index aqi-1">Good</p>
@@ -113,27 +115,31 @@
                             <i class="fa-regular fa-wind fa-3x"></i>
                             <div class="item">
                                 <p>PM2.5</p>
-                                <p>___</p>
+                                <h1>___</h1>
                             </div>
                             <div class="item">
                                 <p>PM10</p>
-                                <p>___</p>
+                                <h2>___</h2>
                             </div>
                             <div class="item">
                                 <p>SO2</p>
-                                <p>___</p>
+                                <h2>___</h2>
                             </div>
                             <div class="item">
                                 <p>CO</p>
-                                <p>___</p>
+                                <h2>___</h2>
                             </div>
                             <div class="item">
                                 <p>NO</p>
-                                <p>___</p>
+                                <h2>___</h2>
                             </div>
                             <div class="item">
                                 <p>NO2</p>
-                                <p>___</p>
+                                <h2>___</h2>
+                            </div>
+                            <div class="item">
+                                <p>NH3</p>
+                                <h2>___</h2>
                             </div>
                             <div class="item">
                                 <p>03</p>
@@ -177,7 +183,7 @@
                         </div>
                         <div class="card-item">
                             <i class="fa-light fa-droplet fa-2x"></i>
-                            <h2 id="pressureval">___hPa</h2>
+                            <h2 id="humidityVal">___hPa</h2>
                         </div>
                     </div>
                     <div class="card">
@@ -186,7 +192,7 @@
                         </div>
                         <div class="card-item">
                             <i class="fa-light fa-compass fa-2x"></i>
-                            <h2 id="humidityval">___%</h2>
+                            <h2 id="pressureVal">___%</h2>
                         </div>
                     </div>
                     <div class="card">
@@ -195,7 +201,7 @@
                         </div>
                         <div class="card-item">
                             <i class="fa-light fa-compass fa-2x"></i>
-                            <h2 id="visibilityval">___km</h2>
+                            <h2 id="visibilityVal">___km</h2>
                         </div>
                     </div>
                     <div class="card">
